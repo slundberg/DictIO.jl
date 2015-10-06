@@ -23,12 +23,9 @@ preserved, but other types may fail to load.
 """
 function readdict(f::IOStream; reversed=false)
     parts = split(strip(readline(f)), '\t')
-    println(parts[1])
-    println(parse(parts[1]))
     type1 = eval(parse(parts[1]))
     type2 = eval(parse(parts[2]))
     d = reversed ? Dict{type2,type1}() : Dict{type1,type2}()
-    println(d)
     for line in eachline(f)
         k,v = split(strip(line), '\t', limit=2)
         if type1 <: Number
